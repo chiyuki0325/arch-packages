@@ -1,0 +1,107 @@
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Contributor: Sven-Hendrik Haase <sh@lutzhaase.com>
+# Contributor: Jan "heftig" Steffens <jan.steffens@gmail.com>
+# Contributor: Eduardo Romero <eduardo@archlinux.org>
+# Contributor: Giovanni Scafora <giovanni@archlinux.org>
+# Contributor: YidaozhanYa <yidaozhan_ya@outlook.com>
+
+pkgname=wine-lutris-ge-616-bin
+pkgver=6.16
+pkgrel=1
+
+#_winever=${pkgver%.*}
+#_winever=$pkgver
+_pkgbasever=${pkgver/rc/-rc}
+_winever=$_pkgbasever
+
+source=(https://github.com/GloriousEggroll/wine-ge-custom/releases/download/6.16-GE-1/lutris-ge-6.16-1-x86_64.tar.xz
+        30-win32-aliases.conf
+        wine-binfmt.conf)
+sha512sums=('6fe76f3e593ae6cd7dc4dacee89714fa7b429ae57aafabfcf4ff35c995cd10a4c161917d93a5f21a76b06c94e23bdc09aa692756c157bc29eafdf82c31db5c5f'
+            '6e54ece7ec7022b3c9d94ad64bdf1017338da16c618966e8baf398e6f18f80f7b0576edf1d1da47ed77b96d577e4cbb2bb0156b0b11c183a0accf22654b0a2bb'
+            'bdde7ae015d8a98ba55e84b86dc05aca1d4f8de85be7e4bd6187054bfe4ac83b5a20538945b63fb073caab78022141e9545685e4e3698c97ff173cf30859e285')
+
+pkgdesc="A compatibility layer for running Windows programs - Lutris GE 6.16 version"
+url="https://www.wine-staging.com"
+arch=(x86_64)
+options=(staticlibs !lto)
+license=(LGPL)
+
+depends=(
+  attr             lib32-attr
+  fontconfig       lib32-fontconfig
+  lcms2            lib32-lcms2
+  libxml2          lib32-libxml2
+  libxcursor       lib32-libxcursor
+  libxrandr        lib32-libxrandr
+  libxdamage       lib32-libxdamage
+  libxi            lib32-libxi
+  gettext          lib32-gettext
+  freetype2        lib32-freetype2
+  glu              lib32-glu
+  libsm            lib32-libsm
+  gcc-libs         lib32-gcc-libs
+  libpcap          lib32-libpcap
+  faudio           lib32-faudio
+  desktop-file-utils
+)
+
+optdepends=(
+  giflib                lib32-giflib
+  libpng                lib32-libpng
+  libldap               lib32-libldap
+  gnutls                lib32-gnutls
+  mpg123                lib32-mpg123
+  openal                lib32-openal
+  v4l-utils             lib32-v4l-utils
+  libpulse              lib32-libpulse
+  alsa-plugins          lib32-alsa-plugins
+  alsa-lib              lib32-alsa-lib
+  libjpeg-turbo         lib32-libjpeg-turbo
+  libxcomposite         lib32-libxcomposite
+  libxinerama           lib32-libxinerama
+  opencl-icd-loader     lib32-opencl-icd-loader
+  libxslt               lib32-libxslt
+  libva                 lib32-libva
+  gtk3                  lib32-gtk3
+  gst-plugins-base-libs lib32-gst-plugins-base-libs
+  vulkan-icd-loader     lib32-vulkan-icd-loader
+  sdl2                  lib32-sdl2
+  vkd3d                 lib32-vkd3d
+  sane
+  libgphoto2
+  gsm
+  ffmpeg
+  cups
+  samba           dosbox
+)
+
+provides=("wine=$pkgver" "wine-wow64=$pkgver")
+conflicts=('wine' 'wine-wow64')
+install=wine.install
+
+
+package() {
+  mkdir -p "${pkgdir}/usr/lib"
+  mkdir -p "${pkgdir}/usr/lib32"
+  cp -r "$srcdir/lutris-ge-6.16-1-x86_64/bin" "$pkgdir/usr/bin"
+  cp -r "$srcdir/lutris-ge-6.16-1-x86_64/lib/wine" "$pkgdir/usr/lib32/wine"
+  cp -r "$srcdir/lutris-ge-6.16-1-x86_64/lib64/wine" "$pkgdir/usr/lib/wine"
+  cp -r "$srcdir/lutris-ge-6.16-1-x86_64/share" "$pkgdir/usr/share"
+  rm -rf "$pkgdir/usr/lib/wine/i386-unix"
+  rm -rf "$pkgdir/usr/lib/wine/i386-windows"
+  rm -rf "$pkgdir/usr/lib32/wine/x86_64-unix"
+  rm -rf "$pkgdir/usr/lib32/wine/x86_64-windows"
+  ln -sfd "/usr/lib32/wine/i386-unix" "$pkgdir/usr/lib/wine/i386-unix"
+  ln -sfd "/usr/lib32/wine/i386-windows" "$pkgdir/usr/lib/wine/i386-windows"
+  ln -sfd "/usr/lib/wine/x86_64-unix" "$pkgdir/usr/lib32/wine/x86_64-unix"
+  ln -sfd "/usr/lib/wine/x86_64-windows" "$pkgdir/usr/lib32/wine/x86_64-windows"
+
+  # Font aliasing settings for Win32 applications
+  install -d "$pkgdir"/usr/share/fontconfig/conf.{avail,default}
+  install -m644 "$srcdir/30-win32-aliases.conf" "$pkgdir/usr/share/fontconfig/conf.avail"
+  ln -s ../conf.avail/30-win32-aliases.conf "$pkgdir/usr/share/fontconfig/conf.default/30-win32-aliases.conf"
+  install -Dm 644 "$srcdir/wine-binfmt.conf" "$pkgdir/usr/lib/binfmt.d/wine.conf"
+}
+
+# vim:set ts=8 sts=2 sw=2 et:

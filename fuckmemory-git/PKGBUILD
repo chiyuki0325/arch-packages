@@ -1,0 +1,22 @@
+# Maintainer: Yidaozhan Ya <yidaozhan_ya@outlook.com>
+pkgname=fuckmemory-git
+_pkgname=FuckMemory
+pkgver=1.0.0.0cd46d
+pkgrel=1
+pkgdesc="A GREAT program to fuck your memory or swap"
+arch=('any')
+url="https://github.com/FuckComputer/FuckMemory"
+license=('GPL3')
+makedepends=('make' 'gcc' 'git')
+source=("git+${url}")
+sha256sums=('SKIP')
+
+prepare() {
+	sed -i "s#/usr#\$(PREFIX)#g" "${srcdir}/${_pkgname}/Makefile"
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}"
+	mkdir -p "${pkgdir}/usr"
+	PREFIX="${pkgdir}/usr" make install
+}

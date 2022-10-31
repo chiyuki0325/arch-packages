@@ -1,0 +1,14 @@
+pkgbase = fuckmemory-git
+	pkgdesc = A GREAT program to fuck your memory or swap
+	pkgver = 1.0.0.0cd46d
+	pkgrel = 1
+	url = https://github.com/FuckComputer/FuckMemory
+	arch = any
+	license = GPL3
+	makedepends = make
+	makedepends = gcc
+	makedepends = git
+	source = git+https://github.com/FuckComputer/FuckMemory
+	sha256sums = SKIP
+
+pkgname = fuckmemory-git

@@ -2,7 +2,7 @@
 # Fixed by YidaozhanYa
 pkgname=obs-plugin-input-overlay-git
 _pkgname=input-overlay
-pkgver=5.0.0.r7.g358bb3a
+pkgver=5.0.0.r8.gd2fe20c
 pkgrel=1
 pkgdesc="Show keyboard, gamepad and mouse input on stream"
 arch=('x86_64')

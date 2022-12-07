@@ -1,0 +1,28 @@
+# Maintainer: Yidaozhan Ya <yidaozhan_ya@outlook.com>
+pkgname=linuxqq
+pkgver=2.0.1
+pkgrel=1
+pkgdesc="Tencent QQ NT for Linux"
+arch=('x86_64')
+url="https://im.qq.com"
+license=('custom')
+groups=('')
+depends=('at-spi2-core' 'desktop-file-utils' 'gtk3' 'hicolor-icon-theme' 'libnotify' 'libsecret' 'libxss' 'libxtst' 'nss' 'util-linux-libs' 'bubblewrap')
+optdepends=('libappindicator-gtk3')
+options=('!strip' '!emptydirs')
+install=${pkgname}.install
+source=('https://dldir1.qq.com/qqfile/qq/QQNT/4691a571/QQ-v2.0.1-429_x64.deb'
+		'bubblewrapper.sh')
+sha256sums=('e3aa15ff6ae089b655df3913c6020ca56726bd676995aaf29b313fbd0643ea42'
+			'39279432880918c0435b1ca1d04a376620cd64cfa2c7383492b7563d650b29e3')
+
+package(){
+	tar -xJ -f data.tar.xz -C "${pkgdir}"
+	mkdir -p "${pkgdir}/usr/share/licenses/${pkgname}"
+	ln -s "/opt/QQ/LICENSE" "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+	ln -s "/opt/QQ/LICENSES.chromium.html" "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE.chromium.html"
+	cp "${srcdir}/bubblewrapper.sh" "${pkgdir}/opt/QQ/start.sh"
+	sed -i "s#/opt/QQ/qq#/opt/QQ/start.sh#" "${pkgdir}/usr/share/applications/qq.desktop"
+	mkdir -p "${pkgdir}/usr/bin"
+	ln -s "/opt/QQ/start.sh" "${pkgdir}/usr/bin/qq"
+}

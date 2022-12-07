@@ -13,7 +13,7 @@ install=${pkgname}.install
 source=('https://dldir1.qq.com/qqfile/qq/QQNT/4691a571/QQ-v2.0.1-429_x64.deb'
 		'bubblewrapper.sh')
 sha256sums=('e3aa15ff6ae089b655df3913c6020ca56726bd676995aaf29b313fbd0643ea42'
-			'39279432880918c0435b1ca1d04a376620cd64cfa2c7383492b7563d650b29e3')
+			'43b8c7931cc1ac5cb6896a1d2eade95c8a9732f0a1d9c6567353b4948237f118')
 
 package(){
 	tar -xJ -f data.tar.xz -C "${pkgdir}"

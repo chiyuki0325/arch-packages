@@ -21,6 +21,10 @@ bwrap \
     --ro-bind "$XDG_RUNTIME_DIR/pulse" "$XDG_RUNTIME_DIR/pulse" \
     --tmpfs /tmp \
     --bind "$HOME/.cache" "$HOME/.cache" \
+    --bind "$HOME/.themes" "$HOME/.themes" \
+    --bind "$HOME/.icons" "$HOME/.icons" \
+    --bind "$HOME/.local/share/themes" "$HOME/.local/share/themes" \
+    --bind "$HOME/.local/share/icons" "$HOME/.local/share/icons" \
     --bind "$HOME/.config/fontconfig" "$HOME/.config/fontconfig" \
     --bind "$HOME/.config/QQ" "$HOME/.config/QQ" \
     --bind "$(xdg-user-dir DOWNLOAD)" "$(xdg-user-dir DOWNLOAD)" \

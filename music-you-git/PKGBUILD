@@ -11,8 +11,8 @@ license=('MIT')
 depends=('electron' 'libappindicator-gtk3')
 makedepends=('yarn' 'jq')
 source=(
-  #"music-you::git+${url}.git#branch=dev"
-  "music-you::git+file://music-you.git"
+  "music-you::git+${url}.git#branch=dev"
+  #"music-you::git+file://music-you.git"
   "${_pkgname}.desktop"
   "${_pkgname}.sh"
 )

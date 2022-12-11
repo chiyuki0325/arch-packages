@@ -1,0 +1,83 @@
+# Maintainer: Yidaozhan Ya <yidaozhan_ya@outlook.com>
+
+pkgname=music-you-git
+_pkgname=music-you
+pkgver=2.0.8
+pkgrel=1
+pkgdesc='一个美观简约的 Material You 风格网易云音乐播放器 PC 客户端'
+arch=('aarch64' 'armv7h' 'i686' 'x86_64')
+url='https://github.com//GuMengYu/music-you'
+license=('MIT')
+depends=('electron' 'libappindicator-gtk3')
+makedepends=('yarn' 'jq')
+source=(
+  #"music-you::git+${url}.git#branch=dev"
+  "music-you::git+file://music-you.git"
+  "${_pkgname}.desktop"
+  "${_pkgname}.sh"
+)
+sha256sums=(
+  "SKIP"
+  "92c1c295b556862d99bb38110cb1f5a528e969fec52073007ff23c0f84066d6a"
+  "d15b73684ccb6eb3499fd2128afd3bd18440327e02a8b1fa6a764501e0b5077a"
+)
+
+pkgver(){
+  cd "${srcdir}/${_pkgname}"
+  _pkgver="$(jq '.version' package.json -r)"
+  pkgver="$(git describe --long --tags | sed 's/^v//;s/-/.r/;s/-/./g')"
+  if [ -z "$pkgver" ]; then
+    printf "$_pkgver"
+  else
+    printf "$pkgver"
+  fi
+}
+
+prepare() {
+  cd "${srcdir}/${_pkgname}"
+  yarn install --non-interactive --pure-lockfile --cache-folder "${srcdir}/yarn-cache"
+  yarn run electron:prebuild
+}
+
+build() {
+  cd "${srcdir}/${_pkgname}"
+  if [[ ${CARCH} == "aarch64" ]]; then
+    yarn electron-builder build --arm64 --linux dir
+  elif [[ ${CARCH} == "armv7h" ]]; then
+    yarn electron-builder build --armv7l --linux dir
+  elif [[ ${CARCH} == "i686" ]]; then
+    yarn electron-builder build --ia32 --linux dir
+  elif [[ ${CARCH} == "x86_64" ]]; then
+    yarn electron-builder build --x64 --linux dir
+  fi
+}
+
+package() {
+  cd "${srcdir}/${_pkgname}"
+
+  if [[ ${CARCH} == "aarch64" ]]; then
+    _unpacked_dirname="linux-arm64-unpacked"
+  elif [[ ${CARCH} == "armv7h" ]]; then
+    _unpacked_dirname="linux-armv7l-unpacked"
+  elif [[ ${CARCH} == "i686" ]]; then
+    _unpacked_dirname="linux-ia32-unpacked"
+  elif [[ ${CARCH} == "x86_64" ]]; then
+    _unpacked_dirname="linux-unpacked"
+  fi
+
+  _pkgver="$(jq '.version' package.json -r)"
+  icon_dir="${srcdir}/${_pkgname}/packages/renderer/public/icon"
+  hicolor_dir="${pkgdir}/usr/share/icons/hicolor"
+  icon_name="v-player-music-you"  # 之所以不用 music-you，是因为 KDE 会直接 fallback 到 music 图标
+
+  install -Dm755 "${srcdir}/${_pkgname}/release/${_pkgver}/${_unpacked_dirname}/resources/app.asar" "${pkgdir}/usr/lib/music-you/app.asar"
+
+  install -Dm644 "${srcdir}/${_pkgname}.desktop" "${pkgdir}/usr/share/applications/${_pkgname}.desktop"
+  install -Dm644 "${icon_dir}/icon.png" "${hicolor_dir}/16x16/apps/${icon_name}.png"
+  install -Dm644 "${icon_dir}/icon@2x.png" "${hicolor_dir}/32x32/apps/${icon_name}.png"
+  install -Dm644 "${icon_dir}/icon@3x.png" "${hicolor_dir}/256x256/apps/${icon_name}.png"
+  install -Dm644 "${icon_dir}/icon@4x.png" "${hicolor_dir}/512x512/apps/${icon_name}.png"
+  install -Dm644 "${icon_dir}/icon@5x.png" "${hicolor_dir}/1024x1024/apps/${icon_name}.png"
+
+  install -Dm755 "${srcdir}/${_pkgname}.sh" "${pkgdir}/usr/bin/${_pkgname}"
+}

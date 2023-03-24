@@ -68,7 +68,7 @@ package() {
 		"${pkgdir}/usr/lib/${_pkgname}/node_inject"
 	popd
 	rm "${pkgdir}/usr/lib/${_pkgname}/node_inject"
-#	rm -rf "${pkgdir}/usr/lib/${_pkgname}/node"
+	rm -rf "${pkgdir}/usr/lib/${_pkgname}/node"
 
 	mv "${srcdir}/NodeInject_Hook_example/license-gen/target/release/license-gen" "${pkgdir}/usr/bin/typora-license-gen"
 	msg2 "$("${pkgdir}/usr/bin/typora-license-gen")"

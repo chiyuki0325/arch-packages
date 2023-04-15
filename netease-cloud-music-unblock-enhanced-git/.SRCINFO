@@ -1,7 +1,7 @@
 pkgbase = netease-cloud-music-unblock-enhanced-git
 	pkgdesc = Revive unavailable songs for Netease Cloud Music (Refactored & Enhanced version)
-	pkgver = r667.dbb73aa
-	pkgrel = 2
+	pkgver = r1119.e35da5b
+	pkgrel = 1
 	url = https://github.com/UnblockNeteaseMusic/server
 	arch = x86_64
 	license = LGPL3
@@ -14,7 +14,7 @@ pkgbase = netease-cloud-music-unblock-enhanced-git
 	source = netease-cloud-music-unblock-enhanced
 	source = netease-cloud-music-unblock-enhanced.desktop
 	sha512sums = SKIP
-	sha512sums = ce4d0bf8a0e4ef86c15b16d98be5281a88afcdb93b2657a21f45d69e6c51316dbf1b297df97da4bc07cd221646b772136b4292cbb2b71e8426399adafeff36b1
+	sha512sums = 36144054004de9cac865f1841c618b400069f87f112b9733e93939a8f4fb470787f4417f6fdcd51ab1511eda53e4907b09ea6a0fbbeadb249831501a4a526aaf
 	sha512sums = 0ab98f34584f7c121ea68119f3c2c18e6e49fe722012293ecd9100904685c564ff56cce5b259d995610ff30c3fe236939cf4a24d47f2a858159f967c34ff1999
 
 pkgname = netease-cloud-music-unblock-enhanced-git

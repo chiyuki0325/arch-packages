@@ -1,0 +1,18 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=NetEase Cloud Music Unblock Enhanced
+Name[zh_CN]=网易云音乐 Unblock Enhanced
+Name[zh_TW]=網易雲音樂 Unblock Enhanced
+Name[en_US]=NetEase Cloud Music Unblock Enhanced
+Comment=NetEase Cloud Music Unblock Enhanced
+Comment[zh_CN]=网易云音乐 Unblock Enhanced
+Comment[zh_TW]=網易雲音樂 Unblock Enhanced
+Comment[en_US]=NetEase Cloud Music Unblock Enhanced
+Icon=netease-cloud-music
+Exec=netease-cloud-music-unblock-enhanced %U
+Categories=AudioVideo;Player;
+Terminal=false
+StartupNotify=true
+StartupWMClass=netease-cloud-music-unblock-enhanced
+MimeType=audio/aac;audio/flac;audio/mp3;audio/mp4;audio/mpeg;audio/ogg;audio/x-ape;audio/x-flac;audio/x-mp3;audio/x-mpeg;audio/x-ms-wma;audio/x-vorbis;audio/x-vorbis+ogg;audio/x-wav;

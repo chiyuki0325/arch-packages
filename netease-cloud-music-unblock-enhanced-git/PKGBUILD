@@ -1,4 +1,5 @@
 # Maintainer: bilabila <bilabila@qq.com>
+# Contributor: Yidaozhan Ya <yidaozhan_ya@outlook.com>
 _pkgname=netease-cloud-music-unblock-enhanced
 pkgname=$_pkgname-git
 pkgver=r667.dbb73aa
@@ -10,17 +11,23 @@ provides=($_pkgname)
 conflicts=($_pkgname)
 license=(LGPL3)
 depends=(nss nodejs netease-cloud-music)
-source=(git+https://github.com/UnblockNeteaseMusic/server
-  netease-cloud-music-unblock-enhanced)
+source=(
+git+https://github.com/UnblockNeteaseMusic/server
+  netease-cloud-music-unblock-enhanced
+  netease-cloud-music-unblock-enhanced.desktop
+  )
 sha512sums=(SKIP
-  ce4d0bf8a0e4ef86c15b16d98be5281a88afcdb93b2657a21f45d69e6c51316dbf1b297df97da4bc07cd221646b772136b4292cbb2b71e8426399adafeff36b1)
+  ce4d0bf8a0e4ef86c15b16d98be5281a88afcdb93b2657a21f45d69e6c51316dbf1b297df97da4bc07cd221646b772136b4292cbb2b71e8426399adafeff36b1
+  0ab98f34584f7c121ea68119f3c2c18e6e49fe722012293ecd9100904685c564ff56cce5b259d995610ff30c3fe236939cf4a24d47f2a858159f967c34ff1999
+  )
 pkgver() {
   cd server
   printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
 }
 package() {
-  mkdir -p "$pkgdir"/usr/share/$_pkgname
-  rsync -a server/ "$pkgdir"/usr/share/$_pkgname/ --exclude .git/
-  install -Dm644 server/COPYING "$pkgdir"/usr/share/licenses/$_pkgname/COPYING
-  install -Dm755 $_pkgname "$pkgdir"/usr/bin/$_pkgname
+  mkdir -p "${pkgdir}/usr/share/${_pkgname}"
+  rsync -a "server/" "${pkgdir}/usr/share/${_pkgname}/" --exclude ".git/"
+  install -Dm644 "server/COPYING" "${pkgdir}/usr/share/licenses/${_pkgname}/COPYING"
+  install -Dm644 "netease-cloud-music-unblock-enhanced.desktop" "${pkgdir}/usr/share/applications/netease-cloud-music-unblock-enhanced.desktop"
+  install -Dm755 "$_pkgname" "${pkgdir}/usr/bin/${_pkgname}"
 }

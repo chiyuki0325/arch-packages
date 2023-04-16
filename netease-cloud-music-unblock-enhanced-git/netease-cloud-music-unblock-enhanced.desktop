@@ -9,6 +9,7 @@ Comment=NetEase Cloud Music Unblock Enhanced
 Comment[zh_CN]=网易云音乐 Unblock Enhanced
 Comment[zh_TW]=網易雲音樂 Unblock Enhanced
 Comment[en_US]=NetEase Cloud Music Unblock Enhanced
+Keywords=netease-cloud-music;NetEase Cloud Music;网易云音乐
 Icon=netease-cloud-music
 Exec=netease-cloud-music-unblock-enhanced %U
 Categories=AudioVideo;Player;

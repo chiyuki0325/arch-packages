@@ -5,7 +5,7 @@
 
 pkgname=typora-electron-hooked
 _pkgname=typora
-pkgver=1.5.8
+pkgver=1.6.6
 _electron=electron
 pkgrel=1
 pkgdesc="A minimal markdown editor and reader. (Typora with system electron and NodeInject hook)"
@@ -32,8 +32,8 @@ sha512sums=(
 	'SKIP'
 	'SKIP'
 )
-sha512sums_x86_64=('ceb62393913c5b51486d4867c914d43d9ebe2bd4cb9e6c67f83ca20d816594e968d648c97811ab4f4238acdc21c5cf9b95fa82084e3e33d0a3978dc0974b6e7e')
-sha512sums_aarch64=('7435e2d52a835abf7c349ccc9cf343a40e49bc966692dd6953d49fc8d31c5a9f464bd6b48067d691af2b57cb093a5ed4543097d85912a8b73dbc0d9029aef14d')
+sha512sums_x86_64=('9cd83f9385b6332cf8a0231aebca4f477d4336ceeefba7292a22f63c327a54ede40aa73ba010ae581ce90ff06b10e47d5e3ef2dae067d929329261bc16b0772c')
+sha512sums_aarch64=('b162d67c873c34245b810474c7dbde0dfe60e864e81841b38a145fba1a6d99c92239ffc3b0ac92119e8e85231051fd0b94f200da3edc018fa3c29f884bb46387')
 
 prepare() {
 	bsdtar -xf data.tar.xz -C "$srcdir/"

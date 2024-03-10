@@ -1,2 +1,2 @@
 #!/bin/bash
-env QML2_IMPORT_PATH=/usr/lib/plasma-emojier5/qml:/usr/lib/qt5/qml LANGUAGE=en_US.UTF-8 LANG=en_US.UTF-8 /usr/lib/plasma-emojier5/plasma-emojier
+env QML2_IMPORT_PATH=/usr/lib/plasma-emojier5/qml:/usr/lib/qt/qml LANGUAGE=en_US.UTF-8 LANG=en_US.UTF-8 /usr/lib/plasma-emojier5/plasma-emojier

@@ -1,7 +1,7 @@
 pkgbase = plasma-emojier5
 	pkgdesc = Emoji selector component from KDE Plasma Desktop 5 with some personal tweaks
 	pkgver = 5.27.10
-	pkgrel = 1
+	pkgrel = 2
 	url = https://kde.org/plasma-desktop/
 	arch = x86_64
 	license = LGPL
@@ -12,6 +12,6 @@ pkgbase = plasma-emojier5
 	source = plasma-emojier5
 	sha256sums = de015fc921d34da23d85998a03afa7c81d935f5d9c55261ff7a2b413c9cfd09f
 	sha256sums = 02289a69bfd1095e5007ad5a1a72f29db3b62d5924db4220cef4cd82335a4da2
-	sha256sums = 8297115485ad59c7cc47795eff1990b465de0c5d8216e7e6f87695d26fa9bd29
+	sha256sums = dae5144db34c6f51bdebfd060b9dfdd9b3e957c524cc9312109b12ad19c6b4c2
 
 pkgname = plasma-emojier5

@@ -1,0 +1,50 @@
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+# Contributor: Kirikaze Chiyuki <me@chyk.ink>
+
+_pkgname=plasma-desktop
+pkgname=plasma-emojier5
+pkgver=5.27.10
+_dirver=$(echo $pkgver | cut -d. -f1-3)
+pkgrel=1
+pkgdesc='Emoji selector component from KDE Plasma Desktop 5 with some personal tweaks'
+arch=(x86_64)
+url='https://kde.org/plasma-desktop/'
+license=(LGPL)
+source=(
+  https://download.kde.org/stable/plasma/$_dirver/$_pkgname-$pkgver.tar.xz
+  CMakeLists.patch
+  plasma-emojier5
+)
+depends=()
+optdepends=()
+makedepends=(qt5-declarative extra-cmake-modules)
+sha256sums=(
+  'de015fc921d34da23d85998a03afa7c81d935f5d9c55261ff7a2b413c9cfd09f'
+  '02289a69bfd1095e5007ad5a1a72f29db3b62d5924db4220cef4cd82335a4da2'
+  '8297115485ad59c7cc47795eff1990b465de0c5d8216e7e6f87695d26fa9bd29'
+)
+
+build() {
+  patch $_pkgname-$pkgver/CMakeLists.txt CMakeLists.patch
+  cmake -B build -S $_pkgname-$pkgver \
+    -DCMAKE_INSTALL_LIBEXECDIR=lib \
+    -DBUILD_TESTING=OFF
+  cmake --build build
+}
+
+package() {
+  mkdir -p $pkgdir/usr/lib/plasma-emojier5/qml/org/kde/plasma/emoji
+  mkdir -p $pkgdir/usr/share/applications
+  cat <<EOF >$pkgdir/usr/lib/plasma-emojier5/qml/org/kde/plasma/emoji/qmldir
+module org.kde.plasma.emoji
+plugin EmojierDeclarativePlugin
+
+
+EOF
+  cp build/bin/libEmojierDeclarativePlugin.so $pkgdir/usr/lib/plasma-emojier5/qml/org/kde/plasma/emoji/
+  install -Dm755 build/bin/plasma-emojier $pkgdir/usr/lib/plasma-emojier5/plasma-emojier
+  sed -e '/^Name/s/$/ 5/' -e '/^Exec/s/$/5/' $_pkgname-$pkgver/emojier/app/org.kde.plasma.emojier.desktop > $pkgdir/usr/share/applications/org.kde.plasma.emojier5.desktop
+  install -Dm755 plasma-emojier5 $pkgdir/usr/bin/plasma-emojier5
+}

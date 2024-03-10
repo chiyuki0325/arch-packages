@@ -1,0 +1,57 @@
+diff -U 3 -H -d -r -N -- /home/chiyuki/kwin/src/kwin-6.0.1/src/plugins/overview/overvieweffect.cpp /home/chiyuki/kwin-6.0.1/src/plugins/overview/overvieweffect.cpp
+--- src/plugins/overview/overvieweffect.cpp	2024-03-06 06:35:47.000000000 +0800
++++ src/plugins/overview/overvieweffect.cpp	2024-03-10 22:24:02.334863834 +0800
+@@ -30,17 +30,17 @@
+     , m_shutdownTimer(new QTimer(this))
+ {
+     auto gesture = new EffectTogglableGesture(m_overviewState);
+-    gesture->addTouchpadSwipeGesture(SwipeDirection::Up, 4);
+-    gesture->addTouchscreenSwipeGesture(SwipeDirection::Up, 3);
++    // gesture->addTouchpadSwipeGesture(SwipeDirection::Up, 4);
++    // gesture->addTouchscreenSwipeGesture(SwipeDirection::Up, 3);
+ 
+     auto transitionGesture = new EffectTogglableGesture(m_transitionState);
+-    transitionGesture->addTouchpadSwipeGesture(SwipeDirection::Up, 4);
+-    transitionGesture->addTouchscreenSwipeGesture(SwipeDirection::Up, 3);
++    // transitionGesture->addTouchpadSwipeGesture(SwipeDirection::Up, 4);
++    // transitionGesture->addTouchscreenSwipeGesture(SwipeDirection::Up, 3);
+     m_transitionState->stop();
+ 
+     auto gridGesture = new EffectTogglableGesture(m_gridState);
+-    gridGesture->addTouchpadSwipeGesture(SwipeDirection::Down, 4);
+-    gridGesture->addTouchscreenSwipeGesture(SwipeDirection::Down, 3);
++    // gridGesture->addTouchpadSwipeGesture(SwipeDirection::Down, 4);
++    // gridGesture->addTouchscreenSwipeGesture(SwipeDirection::Down, 3);
+ 
+     connect(m_overviewState, &EffectTogglableState::inProgressChanged, this, &OverviewEffect::overviewGestureInProgressChanged);
+     connect(m_overviewState, &EffectTogglableState::partialActivationFactorChanged, this, &OverviewEffect::overviewPartialActivationFactorChanged);
+diff -U 3 -H -d -r -N -- /home/chiyuki/kwin/src/kwin-6.0.1/src/virtualdesktops.cpp /home/chiyuki/kwin-6.0.1/src/virtualdesktops.cpp
+--- src/virtualdesktops.cpp	2024-03-06 06:35:47.000000000 +0800
++++ src/virtualdesktops.cpp	2024-03-10 22:24:43.127096775 +0800
+@@ -751,8 +751,10 @@
+ 
+     // Gestures
+     // These connections decide which desktop to end on after gesture ends
++    /*
+     connect(m_swipeGestureReleasedX.get(), &QAction::triggered, this, &VirtualDesktopManager::gestureReleasedX);
+     connect(m_swipeGestureReleasedY.get(), &QAction::triggered, this, &VirtualDesktopManager::gestureReleasedY);
++    */
+ 
+     const auto left = [this](qreal cb) {
+         if (grid().width() > 1) {
+@@ -766,6 +768,7 @@
+             Q_EMIT currentChanging(currentDesktop(), m_currentDesktopOffset);
+         }
+     };
++    /*
+     input()->registerTouchpadSwipeShortcut(SwipeDirection::Left, 3, m_swipeGestureReleasedX.get(), left);
+     input()->registerTouchpadSwipeShortcut(SwipeDirection::Right, 3, m_swipeGestureReleasedX.get(), right);
+     input()->registerTouchpadSwipeShortcut(SwipeDirection::Left, 4, m_swipeGestureReleasedX.get(), left);
+@@ -785,6 +788,7 @@
+     input()->registerTouchscreenSwipeShortcut(SwipeDirection::Left, 3, m_swipeGestureReleasedX.get(), left);
+     input()->registerTouchscreenSwipeShortcut(SwipeDirection::Right, 3, m_swipeGestureReleasedX.get(), right);
+ 
++    */
+     // axis events
+     input()->registerAxisShortcut(Qt::MetaModifier | Qt::AltModifier, PointerAxisDown,
+                                   findChild<QAction *>(QStringLiteral("Switch to Next Desktop")));

@@ -5,11 +5,11 @@
 
 pkgname=kwin-without-gestures
 _pkgname=kwin
-pkgver=6.0.2
+pkgver=6.0.3
 _dirver=$(echo $pkgver | cut -d. -f1-3)
 provides=('kwin')
 conflicts=('kwin')
-pkgrel=3
+pkgrel=1
 pkgdesc='An easy to use, but flexible, composited Window Manager (without touchpad gestures)'
 arch=(x86_64)
 url='https://kde.org/plasma-desktop/'
@@ -90,7 +90,7 @@ source=(
 )
 install=$pkgname.install
 sha256sums=(
-  '65340620154fede598daa76cc624739a9824685aa1aa94224efdd5f1b9b076bb'
+  '0f46e776cd508374c552c0a5a55a45bf28f9cccc8870089009854a1134d72a79'
   '065fda75119d86e9d7b1596784d3db004aceafedba075a05482b01dcc745c877'
 )
 

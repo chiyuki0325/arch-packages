@@ -1,7 +1,7 @@
 pkgbase = kwin-without-gestures
 	pkgdesc = An easy to use, but flexible, composited Window Manager (without touchpad gestures)
-	pkgver = 6.0.2
-	pkgrel = 3
+	pkgver = 6.0.3
+	pkgrel = 1
 	url = https://kde.org/plasma-desktop/
 	install = kwin-without-gestures.install
 	arch = x86_64
@@ -78,9 +78,9 @@ pkgbase = kwin-without-gestures
 	optdepends = maliit-keyboard: virtual keyboard for kwin-wayland
 	provides = kwin
 	conflicts = kwin
-	source = https://download.kde.org/stable/plasma/6.0.2/kwin-6.0.2.tar.xz
+	source = https://download.kde.org/stable/plasma/6.0.3/kwin-6.0.3.tar.xz
 	source = 0001-kwin-disable-gestures.diff
-	sha256sums = 65340620154fede598daa76cc624739a9824685aa1aa94224efdd5f1b9b076bb
+	sha256sums = 0f46e776cd508374c552c0a5a55a45bf28f9cccc8870089009854a1134d72a79
 	sha256sums = 065fda75119d86e9d7b1596784d3db004aceafedba075a05482b01dcc745c877
 
 pkgname = kwin-without-gestures

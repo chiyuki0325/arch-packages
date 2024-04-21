@@ -1,0 +1,30 @@
+From b0274680e005651b7f7da2d46510be122b1055f6 Mon Sep 17 00:00:00 2001
+From: Kirikaze Chiyuki <yidaozhanyaqwq@gmail.com>
+Date: Sun, 21 Apr 2024 11:08:10 +0800
+Subject: [PATCH] Fix separator in QLocale::uiLanguages()
+
+Since commit 91e70f23 introduced separator to uiLanguages(), the system
+locale id still does not respect the separator parameter and hardcodes
+dash as separator. Fixing this should make the format consistent.
+
+Change-Id: I1ab8edfa49117bdc9c4353228e73c2d1e5becffc
+---
+ src/corelib/text/qlocale.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/corelib/text/qlocale.cpp b/src/corelib/text/qlocale.cpp
+index d2550fadff..9d7d29c55c 100644
+--- a/src/corelib/text/qlocale.cpp
++++ b/src/corelib/text/qlocale.cpp
+@@ -4749,7 +4749,7 @@ QStringList QLocale::uiLanguages(TagSeparator separator) const
+ #else
+     const bool isSystem = d->m_data == &systemLocaleData;
+     if (isSystem) {
+-        uiLanguages = systemLocale()->query(QSystemLocale::UILanguages).toStringList();
++        uiLanguages = systemLocale()->query(QSystemLocale::UILanguages).toStringList().replaceInStrings(QString(QLatin1Char('-')), QString(QLatin1Char(sep)));
+         // ... but we need to include likely-adjusted forms of each of those, too.
+         // For now, collect up locale Ids representing the entries, for later processing:
+         for (const auto &entry : std::as_const(uiLanguages))
+-- 
+2.44.0
+

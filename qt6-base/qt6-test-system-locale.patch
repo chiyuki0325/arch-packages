@@ -1,0 +1,12 @@
+diff --git a/tests/auto/corelib/text/qlocale/tst_qlocale.cpp b/tests/auto/corelib/text/qlocale/tst_qlocale.cpp
+index 946a7e6821..fa4d8776cc 100644
+--- a/tests/auto/corelib/text/qlocale/tst_qlocale.cpp
++++ b/tests/auto/corelib/text/qlocale/tst_qlocale.cpp
+@@ -4148,6 +4148,8 @@ void tst_QLocale::mySystemLocale()
+             qDebug("\n\t%s", qPrintable(QLocale::system().uiLanguages().join(u"\n\t")));
+         });
+         QCOMPARE(QLocale::system().uiLanguages(), uiLanguages);
++        QCOMPARE(QLocale::system().uiLanguages(QLocale::TagSeparator::Underscore),
++                 uiLanguages.replaceInStrings(u"-", u"_"));
+         reporter.dismiss();
+     }

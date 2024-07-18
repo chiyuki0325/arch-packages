@@ -1,0 +1,9 @@
+pkgbase = sing-box-as-nekobox
+	pkgdesc = Provides a symbolic link to allow NekoBox to find sing-box db files
+	pkgver = 0.1
+	pkgrel = 1
+	arch = any
+	depends = sing-geoip-db
+	depends = sing-geosite-db
+
+pkgname = sing-box-as-nekobox

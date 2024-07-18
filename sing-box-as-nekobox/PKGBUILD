@@ -1,0 +1,12 @@
+# Maintainer: Kirikaze Chiyuki <me@chyk.ink>
+pkgname=sing-box-as-nekobox
+pkgver=0.1
+pkgrel=1
+pkgdesc="Provides a symbolic link to allow NekoBox to find sing-box db files"
+arch=('any')
+depends=('sing-geoip-db' 'sing-geosite-db')
+
+package() {
+	mkdir -p "${pkgdir}/usr/share"
+	ln -sd "/usr/share/sing-box" "${pkgdir}/usr/share/nekobox"
+}
